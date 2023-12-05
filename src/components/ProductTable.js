@@ -12,18 +12,17 @@ const ProductTable = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(filter);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' for ascending, 'desc' for descending
-  const [selectedSort, setSelectedSort] = useState('default'); // 'default', 'asc', 'desc'
-
+  const [sortOrder, setSortOrder] = useState('asc'); 
+  const [selectedSort, setSelectedSort] = useState('default'); 
   useEffect(() => {
-    // Fetch products from the server
-    axios.get('http://localhost:8070/api/products')
+    
+    axios.get('https://product-d4kl.onrender.com/api/products')
       .then(response => setProducts(response.data))
       .catch(error => console.error('Error fetching products:', error));
   }, []);
 
   const updatePrice = (productId, newPrice) => {
-    axios.put(`http://localhost:8070/api/products/${productId}/update-price`, null, {
+    axios.put(`https://product-d4kl.onrender.com/api/products/${productId}/update-price`, null, {
       params: {
         newPrice: newPrice
       }
@@ -65,13 +64,12 @@ const ProductTable = () => {
     } else if (selectedSort === 'desc') {
       return b.price - a.price;
     } else {
-      return 0; // no sorting
+      return 0; 
     }
   });
 
       const handleReset = () => {
-    // Reset the prices to their original values
-    // You need a way to store the original values, you can add a 'originalPrice' property to each product
+    
     setProducts(prevProducts =>
       prevProducts.map(product =>
         ({ ...product, price: product.originalPrice || product.price })
@@ -83,7 +81,7 @@ const ProductTable = () => {
 
 
   return (
-    <div className='h-fit'>
+    <div className='h-fit w-11/12 max-w-full mx-auto'>
       <Category category={categories} setCategory={setCategories} handleCategoryClick={handleCategoryClick} />
       <div className='flex items-center gap-3'>
        
@@ -145,5 +143,7 @@ const ProductTable = () => {
 };
 
 export default ProductTable;
+
+
 
 
