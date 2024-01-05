@@ -7,7 +7,7 @@ const EditPriceModal = ({ productId, onClose, onSave }) => {
 
   const handleSave = () => {
     // Send the updated price to the server
-    axios.put(`http://localhost:8090/api/products/${productId}/update-price`, { newPrice })
+    axios.put(`https://product-d4kl.onrender.com/api/products/${productId}/update-price`, { newPrice })
       .then(response => {
         onSave(response.data);
         onClose();
